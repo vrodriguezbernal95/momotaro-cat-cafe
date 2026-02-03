@@ -514,6 +514,26 @@
             background: var(--blanco);
         }
 
+        .loading-cats {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--gris-oscuro);
+        }
+
+        .loading-cats i {
+            font-size: 3rem;
+            color: var(--naranja-principal);
+            margin-bottom: 1rem;
+        }
+
+        .no-cats-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem;
+            color: var(--gris-oscuro);
+        }
+
         .cats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1287,11 +1307,11 @@
             </div>
             <div class="hero-stats">
                 <div class="stat-item fade-in">
-                    <div class="stat-number">50+</div>
+                    <div class="stat-number" id="adoptedCounter">0</div>
                     <div class="stat-label">Gatos adoptados</div>
                 </div>
                 <div class="stat-item fade-in">
-                    <div class="stat-number">8</div>
+                    <div class="stat-number" id="availableCounter">0</div>
                     <div class="stat-label">Michis residentes</div>
                 </div>
                 <div class="stat-item fade-in">
@@ -1350,38 +1370,11 @@
             <div class="section-divider"></div>
         </div>
 
-        <div class="cats-grid">
-            <div class="cat-card fade-in">
-                <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Momo, gato naranja" loading="lazy">
-                <div class="cat-overlay">
-                    <h4>Momo</h4>
-                    <p>Macho, 3 anios - Jugueton y carinoso</p>
-                    <span class="cat-status status-available">En adopcion</span>
-                </div>
-            </div>
-            <div class="cat-card fade-in">
-                <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Luna, gata gris" loading="lazy">
-                <div class="cat-overlay">
-                    <h4>Luna</h4>
-                    <p>Hembra, 2 anios - Tranquila y observadora</p>
-                    <span class="cat-status status-available">En adopcion</span>
-                </div>
-            </div>
-            <div class="cat-card fade-in">
-                <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Neko, gato blanco" loading="lazy">
-                <div class="cat-overlay">
-                    <h4>Neko</h4>
-                    <p>Macho, 4 anios - Relajado y mimoso</p>
-                    <span class="cat-status status-adopted">Adoptado</span>
-                </div>
-            </div>
-            <div class="cat-card fade-in">
-                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Kuro, gato negro" loading="lazy">
-                <div class="cat-overlay">
-                    <h4>Kuro</h4>
-                    <p>Macho, 1 anio - Curioso y aventurero</p>
-                    <span class="cat-status status-available">En adopcion</span>
-                </div>
+        <div class="cats-grid" id="catsContainer">
+            <!-- Los gatos se cargan dinamicamente desde la API -->
+            <div class="loading-cats">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Cargando michis...</p>
             </div>
         </div>
     </section>
@@ -1858,6 +1851,77 @@
                     }
                 }
             });
+        });
+    </script>
+
+    <!-- API Momotaro Backend -->
+    <script>
+        const API_BASE = 'https://momotaro-backend-production.up.railway.app/api';
+
+        // Cargar estadisticas
+        async function loadStats() {
+            try {
+                const response = await fetch(`${API_BASE}/stats`);
+                const stats = await response.json();
+
+                document.getElementById('adoptedCounter').textContent = stats.adopted || '0';
+                document.getElementById('availableCounter').textContent = stats.available || '0';
+            } catch (error) {
+                console.log('Usando valores por defecto para estadisticas');
+                document.getElementById('adoptedCounter').textContent = '50+';
+                document.getElementById('availableCounter').textContent = '8';
+            }
+        }
+
+        // Cargar gatos
+        async function loadCats() {
+            const container = document.getElementById('catsContainer');
+
+            try {
+                const response = await fetch(`${API_BASE}/cats`);
+                const cats = await response.json();
+
+                if (cats.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-cats-message">
+                            <i class="fas fa-cat" style="font-size: 3rem; color: var(--naranja-principal); margin-bottom: 1rem;"></i>
+                            <p>Pronto conoceras a nuestros michis. Estamos preparando sus perfiles.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = cats.map(cat => `
+                    <div class="cat-card fade-in visible">
+                        ${cat.image_url
+                            ? `<img src="${cat.image_url}" alt="${cat.name}" loading="lazy">`
+                            : `<div style="height: 100%; display: flex; align-items: center; justify-content: center; background: var(--naranja-claro);"><i class="fas fa-cat" style="font-size: 4rem; color: var(--naranja-principal);"></i></div>`
+                        }
+                        <div class="cat-overlay">
+                            <h4>${cat.name}</h4>
+                            <p>${cat.age}${cat.description ? ' - ' + cat.description : ''}</p>
+                            <span class="cat-status ${cat.is_adopted ? 'status-adopted' : 'status-available'}">
+                                ${cat.is_adopted ? 'Adoptado' : 'En adopcion'}
+                            </span>
+                        </div>
+                    </div>
+                `).join('');
+
+            } catch (error) {
+                console.log('Error cargando gatos, mostrando mensaje');
+                container.innerHTML = `
+                    <div class="no-cats-message">
+                        <i class="fas fa-cat" style="font-size: 3rem; color: var(--naranja-principal); margin-bottom: 1rem;"></i>
+                        <p>Pronto conoceras a nuestros michis. Visitanos para conocerlos en persona.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            loadStats();
+            loadCats();
         });
     </script>
 
