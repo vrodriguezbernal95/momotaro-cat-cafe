@@ -1,0 +1,164 @@
+================================================================================
+                    MOMOTARO CAT CAFE - DOCUMENTACION DEL PROYECTO
+================================================================================
+
+DESCRIPCION DEL NEGOCIO:
+------------------------
+Momotaro Cat Cafe es el primer cat cafe de Sabadell (Barcelona). Es una
+cafeteria donde los clientes pueden disfrutar de cafe y reposteria mientras
+interactuan con gatos rescatados de protectoras que estan en adopcion.
+
+Direccion: Av. d'Estrasburg, 53, 08206 Sabadell, Barcelona
+Telefono: +34 621 34 77 75
+Email: momotarocatcafe@gmail.com
+Horario: Mar-Dom 9:30-13:15 | 16:00-20:00 (Lunes cerrado)
+
+
+================================================================================
+                              ESTRUCTURA DEL PROYECTO
+================================================================================
+
+1. LANDING PAGE (GitHub Pages)
+------------------------------
+   Repositorio: https://github.com/vrodriguezbernal95/momotaro-cat-cafe
+   URL publica: https://vrodriguezbernal95.github.io/momotaro-cat-cafe/
+
+   Archivos:
+   - index.html (landing page completa)
+   - imagenes/ (carpeta para capturas de pantalla)
+
+   Caracteristicas:
+   - Diseno responsive con colores naranja (#FF8C42)
+   - Seccion hero con estadisticas dinamicas
+   - Seccion "El Proyecto" con servicios
+   - Galeria de gatos con paginacion (4x2, 8 por pagina)
+   - Tarifas: 7€ individual, 12€ pareja, 35€ grupo
+   - Widget de reservas StickyWork integrado
+   - Normas de convivencia
+   - Testimonios
+   - FAQ con acordeon
+   - Mapa de contacto
+   - Boton flotante de WhatsApp
+   - SEO optimizado con Schema.org
+
+
+2. BACKEND + PANEL ADMIN (Railway)
+----------------------------------
+   Repositorio: https://github.com/vrodriguezbernal95/momotaro-backend (privado)
+   URL backend: https://momotaro-backend-production.up.railway.app
+   URL admin: https://momotaro-backend-production.up.railway.app/admin
+
+   Credenciales admin:
+   - Email: momotarocatcafe@gmail.com
+   - Password: Roser!1996
+
+   Tecnologias:
+   - Node.js + Express
+   - PostgreSQL (Railway)
+   - Cloudinary para imagenes
+
+   Funcionalidades del panel admin:
+   - Login seguro con JWT
+   - Anadir gatos (nombre, edad, descripcion, foto)
+   - Editar gatos
+   - Eliminar gatos
+   - Marcar gatos como adoptados
+   - Contador de gatos adoptados (editable)
+   - Estadisticas en tiempo real
+
+   API Endpoints publicos:
+   - GET /api/cats - Lista todos los gatos
+   - GET /api/cats/available - Solo gatos disponibles
+   - GET /api/stats - Estadisticas (adoptados, disponibles)
+
+
+3. SERVICIOS EXTERNOS
+---------------------
+   Cloudinary (almacenamiento de imagenes):
+   - Cloud name: dthzvqqks
+   - Las imagenes se suben automaticamente desde el panel admin
+   - La propietaria NO necesita acceder a Cloudinary
+
+   StickyWork (sistema de reservas):
+   - Business ID: 13
+   - Widget embebido en la landing page
+
+   Railway (hosting backend):
+   - Proyecto con PostgreSQL + Node.js
+   - Despliegue automatico desde GitHub
+
+
+================================================================================
+                           VARIABLES DE ENTORNO (RAILWAY)
+================================================================================
+
+DATABASE_URL=<referencia a PostgreSQL de Railway>
+CLOUDINARY_CLOUD_NAME=dthzvqqks
+CLOUDINARY_API_KEY=314615613612145
+CLOUDINARY_API_SECRET=MdJB8YBL83trM-1940_2m367k3o
+ADMIN_EMAIL=momotarocatcafe@gmail.com
+ADMIN_PASSWORD_HASH=$2a$10$h.o.n.aQjwiwtsGprNlwfOB7BSGw5scKmxW2WXqMzavmjtxTYFvoy
+JWT_SECRET=momotaro_secret_key_2025_muy_seguro
+
+
+================================================================================
+                              FLUJO DE TRABAJO
+================================================================================
+
+Como la propietaria gestiona los gatos:
+1. Entra a https://momotaro-backend-production.up.railway.app/admin
+2. Inicia sesion con sus credenciales
+3. Anade/edita/elimina gatos desde el panel
+4. Los cambios aparecen automaticamente en la landing page
+
+Como se actualiza la landing page:
+1. Editar archivos en C:\Users\vic_e\Desktop\momotaro cat cafe\
+2. git add -A && git commit -m "mensaje" && git push
+3. GitHub Pages actualiza automaticamente en 1-2 minutos
+
+Como se actualiza el backend:
+1. Editar archivos en C:\Users\vic_e\Desktop\momotaro-backend\
+2. git add -A && git commit -m "mensaje" && git push
+3. Railway redespliega automaticamente en 30-60 segundos
+
+
+================================================================================
+                           TAREAS COMPLETADAS (SESION)
+================================================================================
+
+[x] Crear landing page profesional desde cero
+[x] Anadir SEO completo (meta tags, Open Graph, Schema.org)
+[x] Integrar widget de reservas StickyWork
+[x] Subir landing a GitHub y activar GitHub Pages
+[x] Crear backend con Node.js + Express
+[x] Configurar base de datos PostgreSQL en Railway
+[x] Crear panel de administracion con login
+[x] Implementar CRUD de gatos con subida de imagenes a Cloudinary
+[x] Implementar sistema de adopcion con contador
+[x] Conectar landing page con API del backend
+[x] Configurar CORS para permitir peticiones
+[x] Implementar galeria de gatos con paginacion (4x2)
+[x] Actualizar tarifas (7€, 12€, 35€)
+
+
+================================================================================
+                              TAREAS PENDIENTES
+================================================================================
+
+[ ] Subir fotos reales de los gatos del cafe
+[ ] Actualizar enlaces de redes sociales (Instagram, Facebook, TikTok)
+[ ] Configurar Google Maps con ubicacion exacta
+[ ] Anadir fotos reales de testimonios (opcional)
+[ ] Configurar dominio personalizado (si se compra)
+[ ] Crear politica de privacidad y aviso legal
+
+
+================================================================================
+                                  CONTACTO
+================================================================================
+
+Propietaria del negocio: Roser (momotarocatcafe@gmail.com)
+Desarrollador: vrodriguezbernal95 (GitHub)
+
+Ultima actualizacion: Febrero 2026
+================================================================================
