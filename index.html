@@ -536,8 +536,66 @@
 
         .cats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 1.5rem;
+        }
+
+        .cats-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .cats-pagination button {
+            background: var(--naranja-principal);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cats-pagination button:hover:not(:disabled) {
+            background: var(--naranja-hover);
+            transform: translateY(-2px);
+        }
+
+        .cats-pagination button:disabled {
+            background: var(--gris-oscuro);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .cats-pagination .page-info {
+            font-size: 0.95rem;
+            color: var(--gris-oscuro);
+        }
+
+        @media (max-width: 1200px) {
+            .cats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .cats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .cats-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .cat-card {
@@ -1377,6 +1435,16 @@
                 <p>Cargando michis...</p>
             </div>
         </div>
+
+        <div class="cats-pagination" id="catsPagination" style="display: none;">
+            <button id="prevPageBtn" disabled>
+                <i class="fas fa-chevron-left"></i> Anterior
+            </button>
+            <span class="page-info" id="pageInfo">Pagina 1 de 1</span>
+            <button id="nextPageBtn">
+                Siguiente <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </section>
 
     <!-- Precios -->
@@ -1873,39 +1941,38 @@
             }
         }
 
+        // Variables de paginacion
+        let allCats = [];
+        let currentPage = 1;
+        const catsPerPage = 8; // 4 columnas x 2 filas
+
         // Cargar gatos
         async function loadCats() {
             const container = document.getElementById('catsContainer');
+            const pagination = document.getElementById('catsPagination');
 
             try {
                 const response = await fetch(`${API_BASE}/cats`);
-                const cats = await response.json();
+                allCats = await response.json();
 
-                if (cats.length === 0) {
+                if (allCats.length === 0) {
                     container.innerHTML = `
                         <div class="no-cats-message">
                             <i class="fas fa-cat" style="font-size: 3rem; color: var(--naranja-principal); margin-bottom: 1rem;"></i>
                             <p>Pronto conoceras a nuestros michis. Estamos preparando sus perfiles.</p>
                         </div>
                     `;
+                    pagination.style.display = 'none';
                     return;
                 }
 
-                container.innerHTML = cats.map(cat => `
-                    <div class="cat-card fade-in visible">
-                        ${cat.image_url
-                            ? `<img src="${cat.image_url}" alt="${cat.name}" loading="lazy">`
-                            : `<div style="height: 100%; display: flex; align-items: center; justify-content: center; background: var(--naranja-claro);"><i class="fas fa-cat" style="font-size: 4rem; color: var(--naranja-principal);"></i></div>`
-                        }
-                        <div class="cat-overlay">
-                            <h4>${cat.name}</h4>
-                            <p>${cat.age}${cat.description ? ' - ' + cat.description : ''}</p>
-                            <span class="cat-status ${cat.is_adopted ? 'status-adopted' : 'status-available'}">
-                                ${cat.is_adopted ? 'Adoptado' : 'En adopcion'}
-                            </span>
-                        </div>
-                    </div>
-                `).join('');
+                // Mostrar paginacion si hay mas de 8 gatos
+                if (allCats.length > catsPerPage) {
+                    pagination.style.display = 'flex';
+                    setupPagination();
+                }
+
+                renderCats();
 
             } catch (error) {
                 console.log('Error cargando gatos, mostrando mensaje');
@@ -1915,7 +1982,71 @@
                         <p>Pronto conoceras a nuestros michis. Visitanos para conocerlos en persona.</p>
                     </div>
                 `;
+                pagination.style.display = 'none';
             }
+        }
+
+        // Renderizar gatos de la pagina actual
+        function renderCats() {
+            const container = document.getElementById('catsContainer');
+            const startIndex = (currentPage - 1) * catsPerPage;
+            const endIndex = startIndex + catsPerPage;
+            const catsToShow = allCats.slice(startIndex, endIndex);
+
+            container.innerHTML = catsToShow.map(cat => `
+                <div class="cat-card fade-in visible">
+                    ${cat.image_url
+                        ? `<img src="${cat.image_url}" alt="${cat.name}" loading="lazy">`
+                        : `<div style="height: 100%; display: flex; align-items: center; justify-content: center; background: var(--naranja-claro);"><i class="fas fa-cat" style="font-size: 4rem; color: var(--naranja-principal);"></i></div>`
+                    }
+                    <div class="cat-overlay">
+                        <h4>${cat.name}</h4>
+                        <p>${cat.age}${cat.description ? ' - ' + cat.description : ''}</p>
+                        <span class="cat-status ${cat.is_adopted ? 'status-adopted' : 'status-available'}">
+                            ${cat.is_adopted ? 'Adoptado' : 'En adopcion'}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+
+            updatePaginationButtons();
+        }
+
+        // Configurar botones de paginacion
+        function setupPagination() {
+            document.getElementById('prevPageBtn').addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderCats();
+                    scrollToCats();
+                }
+            });
+
+            document.getElementById('nextPageBtn').addEventListener('click', () => {
+                const totalPages = Math.ceil(allCats.length / catsPerPage);
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderCats();
+                    scrollToCats();
+                }
+            });
+        }
+
+        // Actualizar estado de botones
+        function updatePaginationButtons() {
+            const totalPages = Math.ceil(allCats.length / catsPerPage);
+            const prevBtn = document.getElementById('prevPageBtn');
+            const nextBtn = document.getElementById('nextPageBtn');
+            const pageInfo = document.getElementById('pageInfo');
+
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+            pageInfo.textContent = `Pagina ${currentPage} de ${totalPages}`;
+        }
+
+        // Scroll suave a la seccion de gatos
+        function scrollToCats() {
+            document.getElementById('gatos').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         // Cargar datos al iniciar
