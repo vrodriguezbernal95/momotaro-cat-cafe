@@ -1229,6 +1229,37 @@
             transform: translateY(-5px);
         }
 
+        /* --- Language Switch --- */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-right: 0.5rem;
+        }
+
+        .lang-switch button {
+            background: none;
+            border: 2px solid var(--naranja-principal);
+            color: var(--naranja-principal);
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transicion);
+            line-height: 1;
+        }
+
+        .lang-switch button.active {
+            background: var(--naranja-principal);
+            color: white;
+        }
+
+        .lang-switch button:hover:not(.active) {
+            background: var(--naranja-claro);
+        }
+
         /* --- Responsive --- */
         @media (max-width: 992px) {
             .contact-container {
@@ -1334,6 +1365,11 @@
             <i class="fas fa-cat" aria-hidden="true"></i> Momotaro
         </a>
 
+        <div class="lang-switch">
+            <button data-lang="es" class="active" onclick="setLanguage('es')">ES</button>
+            <button data-lang="ca" onclick="setLanguage('ca')">CA</button>
+        </div>
+
         <div class="hamburger" aria-label="Menu" role="button" tabindex="0">
             <span></span>
             <span></span>
@@ -1342,13 +1378,13 @@
 
         <nav role="navigation" aria-label="Menu principal">
             <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#el-proyecto">El Proyecto</a></li>
-                <li><a href="#gatos">Nuestros Gatos</a></li>
-                <li><a href="#precios">Tarifas</a></li>
-                <li><a href="#normas">Normas</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="#reservas" class="btn-reserva">Reservar</a></li>
+                <li><a href="#inicio" data-i18n="nav.inicio">Inicio</a></li>
+                <li><a href="#el-proyecto" data-i18n="nav.proyecto">El Proyecto</a></li>
+                <li><a href="#gatos" data-i18n="nav.gatos">Nuestros Gatos</a></li>
+                <li><a href="#precios" data-i18n="nav.tarifas">Tarifas</a></li>
+                <li><a href="#normas" data-i18n="nav.normas">Normas</a></li>
+                <li><a href="#contacto" data-i18n="nav.contacto">Contacto</a></li>
+                <li><a href="#reservas" class="btn-reserva" data-i18n="nav.reservar">Reservar</a></li>
             </ul>
         </nav>
     </header>
@@ -1356,25 +1392,25 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero">
         <div class="hero-content">
-            <span class="hero-badge">El primer Cat Cafe de Sabadell</span>
-            <h1>Toma un respiro con nuestros michis</h1>
-            <p>Disfruta de un cafe artesano rodeado de gatos rescatados en busca de un hogar. Una experiencia unica de relax, amor y ronroneos.</p>
+            <span class="hero-badge" data-i18n="hero.badge">El primer Cat Cafe de Sabadell</span>
+            <h1 data-i18n="hero.title">Toma un respiro con nuestros michis</h1>
+            <p data-i18n="hero.desc">Disfruta de un cafe artesano rodeado de gatos rescatados en busca de un hogar. Una experiencia unica de relax, amor y ronroneos.</p>
             <div class="hero-buttons">
-                <a href="#reservas" class="btn-primary">Reservar Experiencia</a>
-                <a href="#gatos" class="btn-secondary">Conocer los Gatos</a>
+                <a href="#reservas" class="btn-primary" data-i18n="hero.btn.reservar">Reservar Experiencia</a>
+                <a href="#gatos" class="btn-secondary" data-i18n="hero.btn.gatos">Conocer los Gatos</a>
             </div>
             <div class="hero-stats">
                 <div class="stat-item fade-in">
                     <div class="stat-number" id="adoptedCounter">0</div>
-                    <div class="stat-label">Gatos adoptados</div>
+                    <div class="stat-label" data-i18n="hero.stat.adopted">Gatos adoptados</div>
                 </div>
                 <div class="stat-item fade-in">
                     <div class="stat-number" id="availableCounter">0</div>
-                    <div class="stat-label">Michis residentes</div>
+                    <div class="stat-label" data-i18n="hero.stat.available">Michis residentes</div>
                 </div>
                 <div class="stat-item fade-in">
                     <div class="stat-number">4.9</div>
-                    <div class="stat-label">Valoracion Google</div>
+                    <div class="stat-label" data-i18n="hero.stat.rating">Valoracion Google</div>
                 </div>
             </div>
         </div>
@@ -1383,8 +1419,8 @@
     <!-- El Proyecto -->
     <section id="el-proyecto">
         <div class="section-header fade-in">
-            <h2>Mucho mas que una cafeteria</h2>
-            <p>Momotaro es un proyecto de proteccion animal donde cada visita contribuye al bienestar de nuestros felinos.</p>
+            <h2 data-i18n="proyecto.title">Mucho mas que una cafeteria</h2>
+            <p data-i18n="proyecto.desc">Momotaro es un proyecto de proteccion animal donde cada visita contribuye al bienestar de nuestros felinos.</p>
             <div class="section-divider"></div>
         </div>
 
@@ -1393,29 +1429,29 @@
                 <div class="service-icon">
                     <i class="fas fa-mug-hot"></i>
                 </div>
-                <h3>Cafeteria Artesana</h3>
-                <p>Cafe de especialidad, tes ecologicos y reposteria casera elaborada con ingredientes locales y de temporada.</p>
+                <h3 data-i18n="proyecto.cafe.title">Cafeteria Artesana</h3>
+                <p data-i18n="proyecto.cafe.desc">Cafe de especialidad, tes ecologicos y reposteria casera elaborada con ingredientes locales y de temporada.</p>
             </div>
             <div class="service-card fade-in">
                 <div class="service-icon">
                     <i class="fas fa-heart"></i>
                 </div>
-                <h3>Adopcion Responsable</h3>
-                <p>Todos nuestros gatos provienen de protectoras. Te acompanamos en el proceso para encontrar tu companero ideal.</p>
+                <h3 data-i18n="proyecto.adopcion.title">Adopcion Responsable</h3>
+                <p data-i18n="proyecto.adopcion.desc">Todos nuestros gatos provienen de protectoras. Te acompanamos en el proceso para encontrar tu companero ideal.</p>
             </div>
             <div class="service-card fade-in">
                 <div class="service-icon">
                     <i class="fas fa-hand-holding-heart"></i>
                 </div>
-                <h3>Terapia Felina</h3>
-                <p>Sesiones especiales de interaccion con gatos para reducir el estres y mejorar el bienestar emocional.</p>
+                <h3 data-i18n="proyecto.terapia.title">Terapia Felina</h3>
+                <p data-i18n="proyecto.terapia.desc">Sesiones especiales de interaccion con gatos para reducir el estres y mejorar el bienestar emocional.</p>
             </div>
             <div class="service-card fade-in">
                 <div class="service-icon">
                     <i class="fas fa-shopping-bag"></i>
                 </div>
-                <h3>Tienda Solidaria</h3>
-                <p>Productos exclusivos para humanos y felinos. El 10% de cada compra se destina a protectoras locales.</p>
+                <h3 data-i18n="proyecto.tienda.title">Tienda Solidaria</h3>
+                <p data-i18n="proyecto.tienda.desc">Productos exclusivos para humanos y felinos. El 10% de cada compra se destina a protectoras locales.</p>
             </div>
         </div>
     </section>
@@ -1423,26 +1459,25 @@
     <!-- Nuestros Gatos -->
     <section id="gatos">
         <div class="section-header fade-in">
-            <h2>Conoce a nuestros michis</h2>
-            <p>Cada uno tiene su personalidad unica y esta esperando conocerte. Quiza uno de ellos sea tu futuro companero.</p>
+            <h2 data-i18n="gatos.title">Conoce a nuestros michis</h2>
+            <p data-i18n="gatos.desc">Cada uno tiene su personalidad unica y esta esperando conocerte. Quiza uno de ellos sea tu futuro companero.</p>
             <div class="section-divider"></div>
         </div>
 
         <div class="cats-grid" id="catsContainer">
-            <!-- Los gatos se cargan dinamicamente desde la API -->
             <div class="loading-cats">
                 <i class="fas fa-spinner fa-spin"></i>
-                <p>Cargando michis...</p>
+                <p data-i18n="gatos.loading">Cargando michis...</p>
             </div>
         </div>
 
         <div class="cats-pagination" id="catsPagination" style="display: none;">
             <button id="prevPageBtn" disabled>
-                <i class="fas fa-chevron-left"></i> Anterior
+                <i class="fas fa-chevron-left"></i> <span data-i18n="gatos.prev">Anterior</span>
             </button>
             <span class="page-info" id="pageInfo">Pagina 1 de 1</span>
             <button id="nextPageBtn">
-                Siguiente <i class="fas fa-chevron-right"></i>
+                <span data-i18n="gatos.next">Siguiente</span> <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     </section>
@@ -1450,47 +1485,47 @@
     <!-- Precios -->
     <section id="precios">
         <div class="section-header fade-in">
-            <h2>Nuestras Tarifas</h2>
-            <p>Elige la experiencia que mejor se adapte a ti. Todas incluyen acceso a la zona de gatos.</p>
+            <h2 data-i18n="precios.title">Nuestras Tarifas</h2>
+            <p data-i18n="precios.desc">Elige la experiencia que mejor se adapte a ti. Todas incluyen acceso a la zona de gatos.</p>
             <div class="section-divider"></div>
         </div>
 
         <div class="pricing-grid">
             <div class="pricing-card fade-in">
                 <div class="pricing-icon">&#128100;</div>
-                <h3>Individual</h3>
-                <div class="price">7&euro;<span> / 1 persona</span></div>
+                <h3 data-i18n="precios.individual">Individual</h3>
+                <div class="price">7&euro;<span data-i18n="precios.individual.per"> / 1 persona</span></div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Bebida incluida</li>
-                    <li><i class="fas fa-check"></i> Postre + dulce casero</li>
-                    <li><i class="fas fa-check"></i> Foto de recuerdo</li>
-                    <li><i class="fas fa-check"></i> Acceso a zona de gatos</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat1">Bebida incluida</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat2">Postre + dulce casero</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat3">Foto de recuerdo</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat4">Acceso a zona de gatos</span></li>
                 </ul>
-                <a href="#reservas" class="btn-secondary">Reservar</a>
+                <a href="#reservas" class="btn-secondary" data-i18n="precios.reservar">Reservar</a>
             </div>
             <div class="pricing-card featured fade-in">
                 <div class="pricing-icon">&#128107;</div>
-                <h3>Pareja</h3>
-                <div class="price">12&euro;<span> / 2 personas</span></div>
+                <h3 data-i18n="precios.pareja">Pareja</h3>
+                <div class="price">12&euro;<span data-i18n="precios.pareja.per"> / 2 personas</span></div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Bebida incluida</li>
-                    <li><i class="fas fa-check"></i> Postre + dulce casero</li>
-                    <li><i class="fas fa-check"></i> Foto de recuerdo</li>
-                    <li><i class="fas fa-check"></i> Acceso a zona de gatos</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat1">Bebida incluida</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat2">Postre + dulce casero</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat3">Foto de recuerdo</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat4">Acceso a zona de gatos</span></li>
                 </ul>
-                <a href="#reservas" class="btn-primary">Reservar</a>
+                <a href="#reservas" class="btn-primary" data-i18n="precios.reservar">Reservar</a>
             </div>
             <div class="pricing-card fade-in">
                 <div class="pricing-icon">&#128101;</div>
-                <h3>Grupo</h3>
-                <div class="price">35&euro;<span> / 6 personas</span></div>
+                <h3 data-i18n="precios.grupo">Grupo</h3>
+                <div class="price">35&euro;<span data-i18n="precios.grupo.per"> / 6 personas</span></div>
                 <ul class="pricing-features">
-                    <li><i class="fas fa-check"></i> Bebida incluida</li>
-                    <li><i class="fas fa-check"></i> Postre + dulce casero</li>
-                    <li><i class="fas fa-check"></i> Foto de recuerdo</li>
-                    <li><i class="fas fa-check"></i> Acceso a zona de gatos</li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat1">Bebida incluida</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat2">Postre + dulce casero</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat3">Foto de recuerdo</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="precios.feat4">Acceso a zona de gatos</span></li>
                 </ul>
-                <a href="#reservas" class="btn-secondary">Reservar</a>
+                <a href="#reservas" class="btn-secondary" data-i18n="precios.reservar">Reservar</a>
             </div>
         </div>
     </section>
@@ -1498,8 +1533,8 @@
     <!-- Reservas - Widget StickyWork -->
     <section id="reservas">
         <div class="section-header fade-in">
-            <h2>Reserva tu experiencia</h2>
-            <p>Elige el dia y hora que mejor te venga. Te esperamos con ronroneos.</p>
+            <h2 data-i18n="reservas.title">Reserva tu experiencia</h2>
+            <p data-i18n="reservas.desc">Elige el dia y hora que mejor te venga. Te esperamos con ronroneos.</p>
             <div class="section-divider"></div>
         </div>
         <div id="stickywork-widget" class="fade-in"></div>
@@ -1508,8 +1543,8 @@
     <!-- Normas -->
     <section id="normas">
         <div class="section-header fade-in">
-            <h2>Normas de Convivencia</h2>
-            <p>Para garantizar el bienestar de nuestros michis y una experiencia magica para todos.</p>
+            <h2 data-i18n="normas.title">Normas de Convivencia</h2>
+            <p data-i18n="normas.desc">Para garantizar el bienestar de nuestros michis y una experiencia magica para todos.</p>
             <div class="section-divider"></div>
         </div>
 
@@ -1519,8 +1554,8 @@
                     <i class="fas fa-volume-mute"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Ambiente tranquilo</h4>
-                    <p>Habla en tono bajo para no asustar a los gatos.</p>
+                    <h4 data-i18n="normas.silencio.title">Ambiente tranquilo</h4>
+                    <p data-i18n="normas.silencio.desc">Habla en tono bajo para no asustar a los gatos.</p>
                 </div>
             </div>
             <div class="rule-item fade-in">
@@ -1528,8 +1563,8 @@
                     <i class="fas fa-camera"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Fotos sin flash</h4>
-                    <p>Captura momentos magicos sin molestarles.</p>
+                    <h4 data-i18n="normas.foto.title">Fotos sin flash</h4>
+                    <p data-i18n="normas.foto.desc">Captura momentos magicos sin molestarles.</p>
                 </div>
             </div>
             <div class="rule-item fade-in">
@@ -1537,8 +1572,8 @@
                     <i class="fas fa-moon"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Respeta su descanso</h4>
-                    <p>Si un gato duerme, dejalo descansar tranquilo.</p>
+                    <h4 data-i18n="normas.descanso.title">Respeta su descanso</h4>
+                    <p data-i18n="normas.descanso.desc">Si un gato duerme, dejalo descansar tranquilo.</p>
                 </div>
             </div>
             <div class="rule-item fade-in">
@@ -1546,8 +1581,8 @@
                     <i class="fas fa-utensils"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Solo su comida</h4>
-                    <p>No les des alimentos humanos por su salud.</p>
+                    <h4 data-i18n="normas.comida.title">Solo su comida</h4>
+                    <p data-i18n="normas.comida.desc">No les des alimentos humanos por su salud.</p>
                 </div>
             </div>
             <div class="rule-item fade-in">
@@ -1555,8 +1590,8 @@
                     <i class="fas fa-hands-wash"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Higiene</h4>
-                    <p>Lavate las manos al entrar y al salir.</p>
+                    <h4 data-i18n="normas.higiene.title">Higiene</h4>
+                    <p data-i18n="normas.higiene.desc">Lavate las manos al entrar y al salir.</p>
                 </div>
             </div>
             <div class="rule-item fade-in">
@@ -1564,8 +1599,8 @@
                     <i class="fas fa-child"></i>
                 </div>
                 <div class="rule-text">
-                    <h4>Menores supervisados</h4>
-                    <p>Los peques siempre con un adulto cerca.</p>
+                    <h4 data-i18n="normas.menores.title">Menores supervisados</h4>
+                    <p data-i18n="normas.menores.desc">Los peques siempre con un adulto cerca.</p>
                 </div>
             </div>
         </div>
@@ -1574,8 +1609,8 @@
     <!-- Testimonios -->
     <section id="testimonios">
         <div class="section-header fade-in">
-            <h2>Lo que dicen nuestros visitantes</h2>
-            <p>Experiencias reales de quienes ya han disfrutado de Momotaro.</p>
+            <h2 data-i18n="testimonios.title">Lo que dicen nuestros visitantes</h2>
+            <p data-i18n="testimonios.desc">Experiencias reales de quienes ya han disfrutado de Momotaro.</p>
             <div class="section-divider"></div>
         </div>
 
@@ -1589,12 +1624,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Un lugar increible para desconectar. Los gatos son adorables y el cafe es delicioso. Ya hemos vuelto tres veces!"</p>
+                    <p class="testimonial-text" data-i18n="testimonios.t1.text">"Un lugar increible para desconectar. Los gatos son adorables y el cafe es delicioso. Ya hemos vuelto tres veces!"</p>
                     <div class="testimonial-author">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Maria Garcia" class="author-avatar" loading="lazy">
                         <div class="author-info">
                             <h4>Maria Garcia</h4>
-                            <p>Visitante habitual</p>
+                            <p data-i18n="testimonios.t1.role">Visitante habitual</p>
                         </div>
                     </div>
                 </div>
@@ -1608,12 +1643,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Adoptamos a Neko aqui y fue la mejor decision. El equipo nos acompanio en todo el proceso. Gracias Momotaro!"</p>
+                    <p class="testimonial-text" data-i18n="testimonios.t2.text">"Adoptamos a Neko aqui y fue la mejor decision. El equipo nos acompanio en todo el proceso. Gracias Momotaro!"</p>
                     <div class="testimonial-author">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Lopez" class="author-avatar" loading="lazy">
                         <div class="author-info">
                             <h4>Carlos Lopez</h4>
-                            <p>Padre adoptivo de Neko</p>
+                            <p data-i18n="testimonios.t2.role">Padre adoptivo de Neko</p>
                         </div>
                     </div>
                 </div>
@@ -1627,12 +1662,12 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <p class="testimonial-text">"Celebramos el cumple de mi hija aqui y fue magico. Los ninos disfrutaron muchisimo con los gatitos. Muy recomendable."</p>
+                    <p class="testimonial-text" data-i18n="testimonios.t3.text">"Celebramos el cumple de mi hija aqui y fue magico. Los ninos disfrutaron muchisimo con los gatitos. Muy recomendable."</p>
                     <div class="testimonial-author">
                         <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Ana Martinez" class="author-avatar" loading="lazy">
                         <div class="author-info">
                             <h4>Ana Martinez</h4>
-                            <p>Evento privado</p>
+                            <p data-i18n="testimonios.t3.role">Evento privado</p>
                         </div>
                     </div>
                 </div>
@@ -1643,63 +1678,63 @@
     <!-- FAQ -->
     <section id="faq">
         <div class="section-header fade-in">
-            <h2>Preguntas Frecuentes</h2>
-            <p>Todo lo que necesitas saber antes de visitarnos.</p>
+            <h2 data-i18n="faq.title">Preguntas Frecuentes</h2>
+            <p data-i18n="faq.desc">Todo lo que necesitas saber antes de visitarnos.</p>
             <div class="section-divider"></div>
         </div>
 
         <div class="faq-container">
             <div class="faq-item fade-in">
                 <div class="faq-question">
-                    <span>Es necesario reservar?</span>
+                    <span data-i18n="faq.q1">Es necesario reservar?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">
+                    <div class="faq-answer-content" data-i18n="faq.a1">
                         Si, recomendamos reservar con antelacion, especialmente los fines de semana. Puedes hacerlo a traves de nuestra web o llamando por telefono. Sin reserva, solo podemos garantizar entrada si hay disponibilidad.
                     </div>
                 </div>
             </div>
             <div class="faq-item fade-in">
                 <div class="faq-question">
-                    <span>Pueden venir ninos?</span>
+                    <span data-i18n="faq.q2">Pueden venir ninos?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">
+                    <div class="faq-answer-content" data-i18n="faq.a2">
                         Por supuesto! Los ninos son bienvenidos siempre que esten acompanados y supervisados por un adulto. Les pedimos que respeten el espacio de los gatos y sigan las normas del cafe.
                     </div>
                 </div>
             </div>
             <div class="faq-item fade-in">
                 <div class="faq-question">
-                    <span>Puedo traer a mi mascota?</span>
+                    <span data-i18n="faq.q3">Puedo traer a mi mascota?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">
+                    <div class="faq-answer-content" data-i18n="faq.a3">
                         Por el bienestar de nuestros gatos residentes, no permitimos la entrada de otras mascotas. Queremos que sea un espacio tranquilo y seguro para ellos.
                     </div>
                 </div>
             </div>
             <div class="faq-item fade-in">
                 <div class="faq-question">
-                    <span>Como funciona el proceso de adopcion?</span>
+                    <span data-i18n="faq.q4">Como funciona el proceso de adopcion?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">
+                    <div class="faq-answer-content" data-i18n="faq.a4">
                         Si te enamoras de alguno de nuestros gatos, habla con el equipo. Te explicaremos el proceso: cuestionario de compatibilidad, entrevista, visita pre-adopcion y seguimiento post-adopcion. Buscamos hogares responsables y para siempre.
                     </div>
                 </div>
             </div>
             <div class="faq-item fade-in">
                 <div class="faq-question">
-                    <span>Teneis opciones veganas o sin gluten?</span>
+                    <span data-i18n="faq.q5">Teneis opciones veganas o sin gluten?</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <div class="faq-answer-content">
+                    <div class="faq-answer-content" data-i18n="faq.a5">
                         Si! Contamos con opciones de bebidas vegetales (avena, soja, almendra) y varios dulces sin gluten y veganos. Indicalo al hacer tu pedido y te asesoraremos.
                     </div>
                 </div>
@@ -1710,8 +1745,8 @@
     <!-- Contacto -->
     <section id="contacto">
         <div class="section-header fade-in">
-            <h2>Visitanos</h2>
-            <p>Te esperamos con los brazos abiertos (y los gatos tambien).</p>
+            <h2 data-i18n="contacto.title">Visitanos</h2>
+            <p data-i18n="contacto.desc">Te esperamos con los brazos abiertos (y los gatos tambien).</p>
             <div class="section-divider"></div>
         </div>
 
@@ -1722,7 +1757,7 @@
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
                     <div class="contact-details">
-                        <h4>Direccion</h4>
+                        <h4 data-i18n="contacto.direccion">Direccion</h4>
                         <p>Av. d'Estrasburg, 53<br>08206 Sabadell, Barcelona</p>
                     </div>
                 </div>
@@ -1731,8 +1766,8 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="contact-details">
-                        <h4>Horario</h4>
-                        <p>Martes a Domingo<br>9:30 - 13:15 | 16:00 - 20:00<br><em>Lunes cerrado</em></p>
+                        <h4 data-i18n="contacto.horario">Horario</h4>
+                        <p data-i18n-html="contacto.horario.text">Martes a Domingo<br>9:30 - 13:15 | 16:00 - 20:00<br><em>Lunes cerrado</em></p>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -1740,7 +1775,7 @@
                         <i class="fas fa-phone"></i>
                     </div>
                     <div class="contact-details">
-                        <h4>Telefono</h4>
+                        <h4 data-i18n="contacto.telefono">Telefono</h4>
                         <p><a href="tel:+34621347775">+34 621 34 77 75</a></p>
                     </div>
                 </div>
@@ -1771,7 +1806,7 @@
         <div class="footer-grid">
             <div class="footer-col">
                 <h3><i class="fas fa-cat"></i> Momotaro Cat Cafe</h3>
-                <p>Un espacio creado con amor donde los gatos rescatados encuentran una segunda oportunidad mientras tu disfrutas del mejor cafe.</p>
+                <p data-i18n="footer.about">Un espacio creado con amor donde los gatos rescatados encuentran una segunda oportunidad mientras tu disfrutas del mejor cafe.</p>
                 <div class="social-links">
                     <a href="https://instagram.com/momotarocatcafe" target="_blank" rel="noopener" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
@@ -1785,37 +1820,37 @@
                 </div>
             </div>
             <div class="footer-col">
-                <h3>Enlaces Rapidos</h3>
+                <h3 data-i18n="footer.enlaces">Enlaces Rapidos</h3>
                 <ul>
-                    <li><a href="#el-proyecto">El Proyecto</a></li>
-                    <li><a href="#gatos">Nuestros Gatos</a></li>
-                    <li><a href="#precios">Tarifas</a></li>
-                    <li><a href="#faq">Preguntas Frecuentes</a></li>
+                    <li><a href="#el-proyecto" data-i18n="footer.enlaces.proyecto">El Proyecto</a></li>
+                    <li><a href="#gatos" data-i18n="footer.enlaces.gatos">Nuestros Gatos</a></li>
+                    <li><a href="#precios" data-i18n="footer.enlaces.tarifas">Tarifas</a></li>
+                    <li><a href="#faq" data-i18n="footer.enlaces.faq">Preguntas Frecuentes</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h3>Legal</h3>
                 <ul>
-                    <li><a href="#">Aviso Legal</a></li>
-                    <li><a href="#">Politica de Privacidad</a></li>
-                    <li><a href="#">Politica de Cookies</a></li>
-                    <li><a href="#">Condiciones de Reserva</a></li>
+                    <li><a href="#" data-i18n="footer.legal.aviso">Aviso Legal</a></li>
+                    <li><a href="#" data-i18n="footer.legal.privacidad">Politica de Privacidad</a></li>
+                    <li><a href="#" data-i18n="footer.legal.cookies">Politica de Cookies</a></li>
+                    <li><a href="#" data-i18n="footer.legal.reserva">Condiciones de Reserva</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h3>Newsletter</h3>
-                <p>Recibe noticias de nuevos gatos, eventos especiales y promociones.</p>
+                <h3 data-i18n="footer.newsletter">Newsletter</h3>
+                <p data-i18n="footer.newsletter.desc">Recibe noticias de nuevos gatos, eventos especiales y promociones.</p>
                 <form class="newsletter-form" action="#" method="POST">
-                    <input type="email" placeholder="Tu email" required aria-label="Email para newsletter">
+                    <input type="email" placeholder="Tu email" data-i18n-placeholder="footer.newsletter.placeholder" required aria-label="Email para newsletter">
                     <button type="submit" aria-label="Suscribirse"><i class="fas fa-paper-plane"></i></button>
                 </form>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Momotaro Cat Cafe. Todos los derechos reservados.</p>
+            <p data-i18n="footer.copyright">&copy; 2025 Momotaro Cat Cafe. Todos los derechos reservados.</p>
             <div class="footer-legal">
-                <a href="#">Aviso Legal</a>
-                <a href="#">Privacidad</a>
+                <a href="#" data-i18n="footer.bottom.aviso">Aviso Legal</a>
+                <a href="#" data-i18n="footer.bottom.privacidad">Privacidad</a>
                 <a href="#">Cookies</a>
             </div>
         </div>
@@ -1960,7 +1995,7 @@
                     container.innerHTML = `
                         <div class="no-cats-message">
                             <i class="fas fa-cat" style="font-size: 3rem; color: var(--naranja-principal); margin-bottom: 1rem;"></i>
-                            <p>Pronto conoceras a nuestros michis. Estamos preparando sus perfiles.</p>
+                            <p>${translations[currentLang]['gatos.empty']}</p>
                         </div>
                     `;
                     pagination.style.display = 'none';
@@ -1980,7 +2015,7 @@
                 container.innerHTML = `
                     <div class="no-cats-message">
                         <i class="fas fa-cat" style="font-size: 3rem; color: var(--naranja-principal); margin-bottom: 1rem;"></i>
-                        <p>Pronto conoceras a nuestros michis. Visitanos para conocerlos en persona.</p>
+                        <p>${translations[currentLang]['gatos.error']}</p>
                     </div>
                 `;
                 pagination.style.display = 'none';
@@ -2004,7 +2039,7 @@
                         <h4>${cat.name}</h4>
                         <p>${cat.age}${cat.description ? ' - ' + cat.description : ''}</p>
                         <span class="cat-status ${cat.is_adopted ? 'status-adopted' : 'status-available'}">
-                            ${cat.is_adopted ? 'Adoptado' : 'En adopcion'}
+                            ${cat.is_adopted ? translations[currentLang]['cat.adopted'] : translations[currentLang]['cat.available']}
                         </span>
                     </div>
                 </div>
@@ -2042,7 +2077,7 @@
 
             prevBtn.disabled = currentPage === 1;
             nextBtn.disabled = currentPage === totalPages;
-            pageInfo.textContent = `Pagina ${currentPage} de ${totalPages}`;
+            pageInfo.textContent = `${translations[currentLang]['pagination.page']} ${currentPage} ${translations[currentLang]['pagination.of']} ${totalPages}`;
         }
 
         // Scroll suave a la seccion de gatos
@@ -2064,6 +2099,284 @@
             businessId: 13,
             mode: 'embedded',
             apiUrl: 'https://api.stickywork.com'
+        });
+    </script>
+
+    <!-- Sistema de traduccion ES/CA -->
+    <script>
+        const translations = {
+            es: {
+                'nav.inicio': 'Inicio',
+                'nav.proyecto': 'El Proyecto',
+                'nav.gatos': 'Nuestros Gatos',
+                'nav.tarifas': 'Tarifas',
+                'nav.normas': 'Normas',
+                'nav.contacto': 'Contacto',
+                'nav.reservar': 'Reservar',
+                'hero.badge': 'El primer Cat Cafe de Sabadell',
+                'hero.title': 'Toma un respiro con nuestros michis',
+                'hero.desc': 'Disfruta de un cafe artesano rodeado de gatos rescatados en busca de un hogar. Una experiencia unica de relax, amor y ronroneos.',
+                'hero.btn.reservar': 'Reservar Experiencia',
+                'hero.btn.gatos': 'Conocer los Gatos',
+                'hero.stat.adopted': 'Gatos adoptados',
+                'hero.stat.available': 'Michis residentes',
+                'hero.stat.rating': 'Valoracion Google',
+                'proyecto.title': 'Mucho mas que una cafeteria',
+                'proyecto.desc': 'Momotaro es un proyecto de proteccion animal donde cada visita contribuye al bienestar de nuestros felinos.',
+                'proyecto.cafe.title': 'Cafeteria Artesana',
+                'proyecto.cafe.desc': 'Cafe de especialidad, tes ecologicos y reposteria casera elaborada con ingredientes locales y de temporada.',
+                'proyecto.adopcion.title': 'Adopcion Responsable',
+                'proyecto.adopcion.desc': 'Todos nuestros gatos provienen de protectoras. Te acompanamos en el proceso para encontrar tu companero ideal.',
+                'proyecto.terapia.title': 'Terapia Felina',
+                'proyecto.terapia.desc': 'Sesiones especiales de interaccion con gatos para reducir el estres y mejorar el bienestar emocional.',
+                'proyecto.tienda.title': 'Tienda Solidaria',
+                'proyecto.tienda.desc': 'Productos exclusivos para humanos y felinos. El 10% de cada compra se destina a protectoras locales.',
+                'gatos.title': 'Conoce a nuestros michis',
+                'gatos.desc': 'Cada uno tiene su personalidad unica y esta esperando conocerte. Quiza uno de ellos sea tu futuro companero.',
+                'gatos.loading': 'Cargando michis...',
+                'gatos.prev': 'Anterior',
+                'gatos.next': 'Siguiente',
+                'gatos.empty': 'Pronto conoceras a nuestros michis. Estamos preparando sus perfiles.',
+                'gatos.error': 'Pronto conoceras a nuestros michis. Visitanos para conocerlos en persona.',
+                'cat.adopted': 'Adoptado',
+                'cat.available': 'En adopcion',
+                'pagination.page': 'Pagina',
+                'pagination.of': 'de',
+                'precios.title': 'Nuestras Tarifas',
+                'precios.desc': 'Elige la experiencia que mejor se adapte a ti. Todas incluyen acceso a la zona de gatos.',
+                'precios.individual': 'Individual',
+                'precios.individual.per': ' / 1 persona',
+                'precios.pareja': 'Pareja',
+                'precios.pareja.per': ' / 2 personas',
+                'precios.grupo': 'Grupo',
+                'precios.grupo.per': ' / 6 personas',
+                'precios.feat1': 'Bebida incluida',
+                'precios.feat2': 'Postre + dulce casero',
+                'precios.feat3': 'Foto de recuerdo',
+                'precios.feat4': 'Acceso a zona de gatos',
+                'precios.reservar': 'Reservar',
+                'reservas.title': 'Reserva tu experiencia',
+                'reservas.desc': 'Elige el dia y hora que mejor te venga. Te esperamos con ronroneos.',
+                'normas.title': 'Normas de Convivencia',
+                'normas.desc': 'Para garantizar el bienestar de nuestros michis y una experiencia magica para todos.',
+                'normas.silencio.title': 'Ambiente tranquilo',
+                'normas.silencio.desc': 'Habla en tono bajo para no asustar a los gatos.',
+                'normas.foto.title': 'Fotos sin flash',
+                'normas.foto.desc': 'Captura momentos magicos sin molestarles.',
+                'normas.descanso.title': 'Respeta su descanso',
+                'normas.descanso.desc': 'Si un gato duerme, dejalo descansar tranquilo.',
+                'normas.comida.title': 'Solo su comida',
+                'normas.comida.desc': 'No les des alimentos humanos por su salud.',
+                'normas.higiene.title': 'Higiene',
+                'normas.higiene.desc': 'Lavate las manos al entrar y al salir.',
+                'normas.menores.title': 'Menores supervisados',
+                'normas.menores.desc': 'Los peques siempre con un adulto cerca.',
+                'testimonios.title': 'Lo que dicen nuestros visitantes',
+                'testimonios.desc': 'Experiencias reales de quienes ya han disfrutado de Momotaro.',
+                'testimonios.t1.text': '"Un lugar increible para desconectar. Los gatos son adorables y el cafe es delicioso. Ya hemos vuelto tres veces!"',
+                'testimonios.t1.role': 'Visitante habitual',
+                'testimonios.t2.text': '"Adoptamos a Neko aqui y fue la mejor decision. El equipo nos acompanio en todo el proceso. Gracias Momotaro!"',
+                'testimonios.t2.role': 'Padre adoptivo de Neko',
+                'testimonios.t3.text': '"Celebramos el cumple de mi hija aqui y fue magico. Los ninos disfrutaron muchisimo con los gatitos. Muy recomendable."',
+                'testimonios.t3.role': 'Evento privado',
+                'faq.title': 'Preguntas Frecuentes',
+                'faq.desc': 'Todo lo que necesitas saber antes de visitarnos.',
+                'faq.q1': 'Es necesario reservar?',
+                'faq.a1': 'Si, recomendamos reservar con antelacion, especialmente los fines de semana. Puedes hacerlo a traves de nuestra web o llamando por telefono. Sin reserva, solo podemos garantizar entrada si hay disponibilidad.',
+                'faq.q2': 'Pueden venir ninos?',
+                'faq.a2': 'Por supuesto! Los ninos son bienvenidos siempre que esten acompanados y supervisados por un adulto. Les pedimos que respeten el espacio de los gatos y sigan las normas del cafe.',
+                'faq.q3': 'Puedo traer a mi mascota?',
+                'faq.a3': 'Por el bienestar de nuestros gatos residentes, no permitimos la entrada de otras mascotas. Queremos que sea un espacio tranquilo y seguro para ellos.',
+                'faq.q4': 'Como funciona el proceso de adopcion?',
+                'faq.a4': 'Si te enamoras de alguno de nuestros gatos, habla con el equipo. Te explicaremos el proceso: cuestionario de compatibilidad, entrevista, visita pre-adopcion y seguimiento post-adopcion. Buscamos hogares responsables y para siempre.',
+                'faq.q5': 'Teneis opciones veganas o sin gluten?',
+                'faq.a5': 'Si! Contamos con opciones de bebidas vegetales (avena, soja, almendra) y varios dulces sin gluten y veganos. Indicalo al hacer tu pedido y te asesoraremos.',
+                'contacto.title': 'Visitanos',
+                'contacto.desc': 'Te esperamos con los brazos abiertos (y los gatos tambien).',
+                'contacto.direccion': 'Direccion',
+                'contacto.horario': 'Horario',
+                'contacto.horario.text': 'Martes a Domingo<br>9:30 - 13:15 | 16:00 - 20:00<br><em>Lunes cerrado</em>',
+                'contacto.telefono': 'Telefono',
+                'footer.about': 'Un espacio creado con amor donde los gatos rescatados encuentran una segunda oportunidad mientras tu disfrutas del mejor cafe.',
+                'footer.enlaces': 'Enlaces Rapidos',
+                'footer.enlaces.proyecto': 'El Proyecto',
+                'footer.enlaces.gatos': 'Nuestros Gatos',
+                'footer.enlaces.tarifas': 'Tarifas',
+                'footer.enlaces.faq': 'Preguntas Frecuentes',
+                'footer.legal.aviso': 'Aviso Legal',
+                'footer.legal.privacidad': 'Politica de Privacidad',
+                'footer.legal.cookies': 'Politica de Cookies',
+                'footer.legal.reserva': 'Condiciones de Reserva',
+                'footer.newsletter': 'Newsletter',
+                'footer.newsletter.desc': 'Recibe noticias de nuevos gatos, eventos especiales y promociones.',
+                'footer.newsletter.placeholder': 'Tu email',
+                'footer.copyright': '\u00A9 2025 Momotaro Cat Cafe. Todos los derechos reservados.',
+                'footer.bottom.aviso': 'Aviso Legal',
+                'footer.bottom.privacidad': 'Privacidad'
+            },
+            ca: {
+                'nav.inicio': 'Inici',
+                'nav.proyecto': 'El Projecte',
+                'nav.gatos': 'Els Nostres Gats',
+                'nav.tarifas': 'Tarifes',
+                'nav.normas': 'Normes',
+                'nav.contacto': 'Contacte',
+                'nav.reservar': 'Reservar',
+                'hero.badge': 'El primer Cat Caf\u00E8 de Sabadell',
+                'hero.title': 'Pren un respir amb els nostres minins',
+                'hero.desc': "Gaudeix d'un caf\u00E8 artes\u00E0 envoltat de gats rescatats que busquen una llar. Una experi\u00E8ncia \u00FAnica de relax, amor i roncs.",
+                'hero.btn.reservar': 'Reservar Experi\u00E8ncia',
+                'hero.btn.gatos': 'Con\u00E8ixer els Gats',
+                'hero.stat.adopted': 'Gats adoptats',
+                'hero.stat.available': 'Minins residents',
+                'hero.stat.rating': 'Valoraci\u00F3 Google',
+                'proyecto.title': 'Molt m\u00E9s que una cafeteria',
+                'proyecto.desc': 'Momotaro \u00E9s un projecte de protecci\u00F3 animal on cada visita contribueix al benestar dels nostres felins.',
+                'proyecto.cafe.title': 'Cafeteria Artesana',
+                'proyecto.cafe.desc': "Caf\u00E8 d'especialitat, tes ecol\u00F2gics i rebosteria casolana elaborada amb ingredients locals i de temporada.",
+                'proyecto.adopcion.title': 'Adopci\u00F3 Responsable',
+                'proyecto.adopcion.desc': "Tots els nostres gats provenen de protectores. T'acompanyem en el proc\u00E9s per trobar el teu company ideal.",
+                'proyecto.terapia.title': 'Ter\u00E0pia Felina',
+                'proyecto.terapia.desc': "Sessions especials d'interacci\u00F3 amb gats per reduir l'estr\u00E8s i millorar el benestar emocional.",
+                'proyecto.tienda.title': 'Botiga Solid\u00E0ria',
+                'proyecto.tienda.desc': 'Productes exclusius per a humans i felins. El 10% de cada compra es destina a protectores locals.',
+                'gatos.title': 'Coneix els nostres minins',
+                'gatos.desc': "Cadascun t\u00E9 la seva personalitat \u00FAnica i est\u00E0 esperant con\u00E8ixer-te. Potser un d'ells ser\u00E0 el teu futur company.",
+                'gatos.loading': 'Carregant minins...',
+                'gatos.prev': 'Anterior',
+                'gatos.next': 'Seg\u00FCent',
+                'gatos.empty': 'Aviat coneixereu els nostres minins. Estem preparant els seus perfils.',
+                'gatos.error': "Aviat coneixereu els nostres minins. Visiteu-nos per con\u00E8ixer-los en persona.",
+                'cat.adopted': 'Adoptat',
+                'cat.available': "En adopci\u00F3",
+                'pagination.page': 'P\u00E0gina',
+                'pagination.of': 'de',
+                'precios.title': 'Les Nostres Tarifes',
+                'precios.desc': "Tria l'experi\u00E8ncia que millor s'adapti a tu. Totes inclouen acc\u00E9s a la zona de gats.",
+                'precios.individual': 'Individual',
+                'precios.individual.per': ' / 1 persona',
+                'precios.pareja': 'Parella',
+                'precios.pareja.per': ' / 2 persones',
+                'precios.grupo': 'Grup',
+                'precios.grupo.per': ' / 6 persones',
+                'precios.feat1': 'Beguda inclosa',
+                'precios.feat2': 'Postres + dol\u00E7 casol\u00E0',
+                'precios.feat3': 'Foto de record',
+                'precios.feat4': "Acc\u00E9s a zona de gats",
+                'precios.reservar': 'Reservar',
+                'reservas.title': 'Reserva la teva experi\u00E8ncia',
+                'reservas.desc': "Tria el dia i hora que millor et vingui. T'esperem amb roncs.",
+                'normas.title': 'Normes de Conviv\u00E8ncia',
+                'normas.desc': "Per garantir el benestar dels nostres minins i una experi\u00E8ncia m\u00E0gica per a tothom.",
+                'normas.silencio.title': 'Ambient tranquil',
+                'normas.silencio.desc': 'Parla en to baix per no espantar els gats.',
+                'normas.foto.title': 'Fotos sense flash',
+                'normas.foto.desc': 'Captura moments m\u00E0gics sense molestar-los.',
+                'normas.descanso.title': 'Respecta el seu descans',
+                'normas.descanso.desc': "Si un gat dorm, deixa'l descansar tranquil.",
+                'normas.comida.title': 'Nom\u00E9s el seu menjar',
+                'normas.comida.desc': 'No els donis aliments humans per la seva salut.',
+                'normas.higiene.title': 'Higiene',
+                'normas.higiene.desc': "Renta't les mans en entrar i en sortir.",
+                'normas.menores.title': 'Menors supervisats',
+                'normas.menores.desc': 'Els petits sempre amb un adult a prop.',
+                'testimonios.title': 'El que diuen els nostres visitants',
+                'testimonios.desc': 'Experi\u00E8ncies reals de qui ja ha gaudit de Momotaro.',
+                'testimonios.t1.text': '"Un lloc incre\u00EFble per desconnectar. Els gats s\u00F3n adorables i el caf\u00E8 \u00E9s delici\u00F3s. Ja hi hem tornat tres vegades!"',
+                'testimonios.t1.role': 'Visitant habitual',
+                'testimonios.t2.text': '"Vam adoptar en Neko aqu\u00ED i va ser la millor decisi\u00F3. L\'equip ens va acompanyar en tot el proc\u00E9s. Gr\u00E0cies Momotaro!"',
+                'testimonios.t2.role': "Pare adoptiu d'en Neko",
+                'testimonios.t3.text': '"Vam celebrar l\'aniversari de la meva filla aqu\u00ED i va ser m\u00E0gic. Els nens van gaudir molt\u00EDssim amb els gatets. Molt recomanable."',
+                'testimonios.t3.role': 'Esdeveniment privat',
+                'faq.title': 'Preguntes Freq\u00FCents',
+                'faq.desc': 'Tot el que necessites saber abans de visitar-nos.',
+                'faq.q1': 'Cal reservar?',
+                'faq.a1': "S\u00ED, recomanem reservar amb antelaci\u00F3, especialment els caps de setmana. Pots fer-ho a trav\u00E9s del nostre web o trucant per tel\u00E8fon. Sense reserva, nom\u00E9s podem garantir entrada si hi ha disponibilitat.",
+                'faq.q2': 'Poden venir nens?',
+                'faq.a2': "Per descomptat! Els nens s\u00F3n benvinguts sempre que estiguin acompanyats i supervisats per un adult. Els demanem que respectin l'espai dels gats i segueixin les normes del caf\u00E8.",
+                'faq.q3': 'Puc portar la meva mascota?',
+                'faq.a3': "Pel benestar dels nostres gats residents, no permetem l'entrada d'altres mascotes. Volem que sigui un espai tranquil i segur per a ells.",
+                'faq.q4': "Com funciona el proc\u00E9s d'adopci\u00F3?",
+                'faq.a4': "Si t'enamores d'algun dels nostres gats, parla amb l'equip. T'explicarem el proc\u00E9s: q\u00FCestionari de compatibilitat, entrevista, visita pre-adopci\u00F3 i seguiment post-adopci\u00F3. Busquem llars responsables i per sempre.",
+                'faq.q5': 'Teniu opcions veganes o sense gluten?',
+                'faq.a5': "S\u00ED! Comptem amb opcions de begudes vegetals (civada, soja, ametlla) i diversos dol\u00E7os sense gluten i vegans. Indica-ho en fer la teva comanda i t'assessorarem.",
+                'contacto.title': "Visita'ns",
+                'contacto.desc': "T'esperem amb els bra\u00E7os oberts (i els gats tamb\u00E9).",
+                'contacto.direccion': 'Adre\u00E7a',
+                'contacto.horario': 'Horari',
+                'contacto.horario.text': 'Dimarts a Diumenge<br>9:30 - 13:15 | 16:00 - 20:00<br><em>Dilluns tancat</em>',
+                'contacto.telefono': 'Tel\u00E8fon',
+                'footer.about': "Un espai creat amb amor on els gats rescatats troben una segona oportunitat mentre tu gaudeixes del millor caf\u00E8.",
+                'footer.enlaces': 'Enlla\u00E7os R\u00E0pids',
+                'footer.enlaces.proyecto': 'El Projecte',
+                'footer.enlaces.gatos': 'Els Nostres Gats',
+                'footer.enlaces.tarifas': 'Tarifes',
+                'footer.enlaces.faq': 'Preguntes Freq\u00FCents',
+                'footer.legal.aviso': 'Av\u00EDs Legal',
+                'footer.legal.privacidad': 'Pol\u00EDtica de Privacitat',
+                'footer.legal.cookies': 'Pol\u00EDtica de Cookies',
+                'footer.legal.reserva': 'Condicions de Reserva',
+                'footer.newsletter': 'Butllet\u00ED',
+                'footer.newsletter.desc': "Rep not\u00EDcies de nous gats, esdeveniments especials i promocions.",
+                'footer.newsletter.placeholder': 'El teu email',
+                'footer.copyright': '\u00A9 2025 Momotaro Cat Caf\u00E8. Tots els drets reservats.',
+                'footer.bottom.aviso': 'Av\u00EDs Legal',
+                'footer.bottom.privacidad': 'Privacitat'
+            }
+        };
+
+        let currentLang = localStorage.getItem('momotaro-lang') || 'es';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('momotaro-lang', lang);
+            document.documentElement.lang = lang;
+
+            // Actualizar botones del switch
+            document.querySelectorAll('.lang-switch button').forEach(function(btn) {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Actualizar textContent
+            document.querySelectorAll('[data-i18n]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Actualizar innerHTML (para contenido con etiquetas HTML)
+            document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-html');
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Actualizar placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    el.placeholder = translations[lang][key];
+                }
+            });
+
+            // Re-renderizar gatos si ya estan cargados
+            if (allCats.length > 0) {
+                renderCats();
+            }
+
+            // Actualizar paginacion
+            if (allCats.length > catsPerPage) {
+                updatePaginationButtons();
+            }
+        }
+
+        // Aplicar idioma guardado al cargar la pagina
+        document.addEventListener('DOMContentLoaded', function() {
+            if (currentLang !== 'es') {
+                setLanguage(currentLang);
+            }
         });
     </script>
 </body>
